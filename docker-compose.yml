@@ -1,6 +1,6 @@
 services:
   db:
-    image: mariadb:latest
+    image: mariadb:11.2
     environment:
       MARIADB_ROOT_PASSWORD: epitech
       MARIADB_DATABASE: studydb
@@ -12,6 +12,20 @@ services:
     ports:
       - 3307:3306
     restart: on-failure
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mariadb-admin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-pepitech",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api:
     build: ./backend/
@@ -22,10 +36,13 @@ services:
     environment:
       - MUSIC_DIR=/app/music/
       - DATABASE_URL=mysql://root:epitech@db:3306/studydb
+      - SECRET=iusearchbtw
     networks:
       - back-tier
+      - front-tier
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: unless-stopped
 
   web:
@@ -34,9 +51,17 @@ services:
       - "8080:80"
     volumes:
       - ./frontend/:/usr/share/nginx/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - API_URL=http://localhost:8080/api/
+    depends_on:
+      - api
+    networks:
+      - front-tier
 
 volumes:
   db-data:
 
 networks:
   back-tier:
+  front-tier:
