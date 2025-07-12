@@ -1,3 +1,3 @@
-pub mod auth;
-pub mod music;
+pub mod jwt;
+pub mod loader;
 pub mod user;
