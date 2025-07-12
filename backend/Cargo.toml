@@ -17,3 +17,6 @@ sea-orm = { version = "1.1.13", features = [
   "sqlx-mysql",
   "runtime-tokio-native-tls",
 ] }
+jsonwebtoken = "9.3.1"
+bcrypt = "0.17.0"
+serde_json = "1.0.140"
