@@ -1,16 +1,19 @@
 use crate::api::entities::user;
-use sea_orm::{ActiveModelTrait, DbConn, EntityTrait, Set};
+use sea_orm::{ActiveModelTrait, DatabaseConnection, EntityTrait, Set};
 
-pub async fn get_users(db: &DbConn) -> Result<Vec<user::Model>, sea_orm::DbErr> {
+pub async fn get_users(db: &DatabaseConnection) -> Result<Vec<user::Model>, sea_orm::DbErr> {
     user::Entity::find().all(db).await
 }
 
-pub async fn get_user(db: &DbConn, id: u32) -> Result<Option<user::Model>, sea_orm::DbErr> {
+pub async fn get_user(
+    db: &DatabaseConnection,
+    id: u32,
+) -> Result<Option<user::Model>, sea_orm::DbErr> {
     user::Entity::find_by_id(id).one(db).await
 }
 
 pub async fn add_user(
-    db: &DbConn,
+    db: &DatabaseConnection,
     email: &str,
     password: &str,
     first_name: &str,
