@@ -4,12 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-sqlx = { version = "0.8.6", features = [
-  "runtime-tokio-rustls",
-  "mysql",
-  "chrono",
-  "macros",
-] }
 actix-cors = "0.7.1"
 actix-web = "4.11.0"
 dotenvy = "0.15.7"
@@ -19,3 +13,10 @@ chrono = { version = "0.4", features = ["serde"] }
 tokio = { version = "1.45.1", features = ["full"] }
 tokio-util = "0.7.15"
 walkdir = "2.5.0"
+sea-orm = { version = "1.1.13", features = [
+  "sqlx-mysql",
+  "runtime-tokio-native-tls",
+] }
+jsonwebtoken = "9.3.1"
+bcrypt = "0.17.0"
+serde_json = "1.0.140"

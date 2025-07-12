@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://populations-want-sd-boating.trycloudflare.com";
+const API_BASE_URL = "http://localhost:8080/api";
 const audioPlayer = document.getElementById('audio');
 const statusMessageElement = document.getElementById('status-message');
 const prevBtn = document.getElementById("previous");

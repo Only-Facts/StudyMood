@@ -1,80 +1,10 @@
+use crate::api::services::loader::{AppState, MusicInfo};
 use actix_web::{HttpResponse, Responder, get, http::header, web};
-use serde::{Deserialize, Serialize};
-use std::{
-    collections::HashMap,
-    io::SeekFrom,
-    path::{Path, PathBuf},
-    sync::Mutex,
-};
+use std::io::SeekFrom;
 use tokio::{
     fs::File,
     io::{AsyncReadExt, AsyncSeekExt},
 };
-use walkdir::WalkDir;
-
-#[derive(Debug, Serialize, Deserialize, Clone)]
-pub struct MusicInfo {
-    file: String,
-    path: String,
-    mime: String,
-}
-
-#[derive(Debug)]
-pub struct AppState {
-    music_dir: PathBuf,
-    tracks: Mutex<HashMap<String, MusicInfo>>,
-}
-
-impl AppState {
-    pub fn new(music_dir: PathBuf, tracks: Mutex<HashMap<String, MusicInfo>>) -> Self {
-        AppState { music_dir, tracks }
-    }
-}
-
-pub async fn load_music_files(music_dir: &Path) -> Result<HashMap<String, MusicInfo>, String> {
-    let mut tracks = HashMap::new();
-    println!("Scanning music directory: {:?}", music_dir);
-
-    if !music_dir.exists() {
-        return Err(format!("Music directory does not exist: {:?}", music_dir));
-    }
-    if !music_dir.is_dir() {
-        return Err(format!(
-            "Music directory is not a directory: {:?}",
-            music_dir
-        ));
-    }
-
-    for entry in WalkDir::new(music_dir).into_iter().filter_map(|e| e.ok()) {
-        let path = entry.path();
-        if path.is_file() {
-            let mime_type = mime_guess::from_path(path)
-                .first_or_text_plain()
-                .to_string();
-
-            if mime_type.starts_with("audio/") {
-                if let Some(filename) = path.file_name().and_then(|s| s.to_str()) {
-                    let relative_path = path
-                        .strip_prefix(music_dir)
-                        .unwrap_or(path)
-                        .to_string_lossy()
-                        .into_owned();
-                    let mut file = filename.to_string();
-                    file.truncate(file.len() - 4);
-                    let track_info = MusicInfo {
-                        file,
-                        path: relative_path.clone(),
-                        mime: mime_type,
-                    };
-                    tracks.insert(relative_path, track_info);
-                    println!("Found music file: {}", filename);
-                }
-            }
-        }
-    }
-    println!("Finished scanning. Found {} music files.", tracks.len());
-    Ok(tracks)
-}
 
 #[get("/")]
 pub async fn list(data: web::Data<AppState>) -> impl Responder {
@@ -95,7 +25,7 @@ pub async fn stream(
 
     let track_info = tracks
         .get(&req_path)
-        .ok_or_else(|| actix_web::error::ErrorNotFound(format!("Track not found: {}", req_path)))?;
+        .ok_or_else(|| actix_web::error::ErrorNotFound(format!("Track not found: {req_path}")))?;
     let file_path = data.music_dir.join(&track_info.path);
     let file_size;
     let mut file = match File::open(&file_path).await {
@@ -129,7 +59,7 @@ pub async fn stream(
                 if start_byte >= file_size || start_byte > end_byte {
                     return Ok(HttpResponse::RangeNotSatisfiable()
                         .insert_header(header::ContentRange(
-                            format!("bytes */{}", file_size).parse().unwrap(),
+                            format!("bytes */{file_size}").parse().unwrap(),
                         ))
                         .finish());
                 }
