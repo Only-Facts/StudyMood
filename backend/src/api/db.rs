@@ -1,6 +1,6 @@
-use sea_orm::{Database, DbConn};
+use sea_orm::{Database, DatabaseConnection};
 
-pub async fn init_db() -> DbConn {
+pub async fn init_db() -> DatabaseConnection {
     dotenvy::dotenv().ok();
     let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
 
