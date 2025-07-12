@@ -1,17 +1,25 @@
-mod auth;
-pub mod db;
-mod music;
+mod db;
+pub mod entities {
+    pub mod todo;
+    pub mod user;
+}
+mod services;
+use services::{auth, music};
 
 use actix_cors::Cors;
 use actix_web::{App, HttpResponse, HttpServer, Responder, get, web};
-use sqlx::mysql::MySqlPoolOptions;
-use std::{env, path::PathBuf, sync::Mutex, time::Duration};
+use sea_orm::DbConn;
+use std::{path::PathBuf, sync::Mutex};
 
 const MUSIC_DIRECTORY_ENV_VAR: &str = "MUSIC_DIR";
 
 #[get("/")]
-async fn default() -> impl Responder {
-    HttpResponse::Ok().body("Hello, world!")
+async fn default(db: web::Data<DbConn>) -> impl Responder {
+    if db.ping().await.is_ok() {
+        HttpResponse::Ok().body("✅ Database connection is alive!")
+    } else {
+        HttpResponse::InternalServerError().body("❌ Failed to ping DB.")
+    }
 }
 
 #[allow(clippy::manual_strip, clippy::io_other_error)]
@@ -22,7 +30,7 @@ pub async fn api() -> std::io::Result<()> {
     let tracks_map = match music::load_music_files(&music_dir).await {
         Ok(map) => map,
         Err(e) => {
-            eprintln!("Error loading music files: {}", e);
+            eprintln!("Error loading music files: {e}");
             return Err(std::io::Error::new(std::io::ErrorKind::Other, e));
         }
     };
@@ -30,17 +38,8 @@ pub async fn api() -> std::io::Result<()> {
         music_dir.clone(),
         Mutex::new(tracks_map),
     ));
-    dotenvy::dotenv().ok();
-    let database_url = env::var("DATABASE_URL").expect("database_url must be set");
-    let pool = match MySqlPoolOptions::new()
-        .max_connections(5)
-        .acquire_timeout(Duration::from_secs(10))
-        .connect(&database_url)
-        .await
-    {
-        Ok(p) => web::Data::new(p),
-        Err(e) => return Err(std::io::Error::new(std::io::ErrorKind::Other, e)),
-    };
+    let conn = web::Data::new(db::init_db().await);
+    println!("[✅] DB Connection Success !");
     HttpServer::new(move || {
         App::new()
             .service(default)
@@ -66,7 +65,7 @@ pub async fn api() -> std::io::Result<()> {
                             .allow_any_header()
                             .max_age(3600),
                     )
-                    .app_data(pool.clone())
+                    .app_data(conn.clone())
                     .service(auth::show_users)
                     .service(auth::show_user),
             )
