@@ -33,16 +33,13 @@ impl AppState {
 
 pub async fn load_music_files(music_dir: &Path) -> Result<HashMap<String, MusicInfo>, String> {
     let mut tracks = HashMap::new();
-    println!("Scanning music directory: {:?}", music_dir);
+    println!("Scanning music directory: {music_dir:?}");
 
     if !music_dir.exists() {
-        return Err(format!("Music directory does not exist: {:?}", music_dir));
+        return Err(format!("Music directory does not exist: {music_dir:?}"));
     }
     if !music_dir.is_dir() {
-        return Err(format!(
-            "Music directory is not a directory: {:?}",
-            music_dir
-        ));
+        return Err(format!("Music directory is not a directory: {music_dir:?}"));
     }
 
     for entry in WalkDir::new(music_dir).into_iter().filter_map(|e| e.ok()) {
@@ -67,7 +64,7 @@ pub async fn load_music_files(music_dir: &Path) -> Result<HashMap<String, MusicI
                         mime: mime_type,
                     };
                     tracks.insert(relative_path, track_info);
-                    println!("Found music file: {}", filename);
+                    println!("Found music file: {filename}");
                 }
             }
         }
@@ -95,7 +92,7 @@ pub async fn stream(
 
     let track_info = tracks
         .get(&req_path)
-        .ok_or_else(|| actix_web::error::ErrorNotFound(format!("Track not found: {}", req_path)))?;
+        .ok_or_else(|| actix_web::error::ErrorNotFound(format!("Track not found: {req_path}")))?;
     let file_path = data.music_dir.join(&track_info.path);
     let file_size;
     let mut file = match File::open(&file_path).await {
@@ -129,7 +126,7 @@ pub async fn stream(
                 if start_byte >= file_size || start_byte > end_byte {
                     return Ok(HttpResponse::RangeNotSatisfiable()
                         .insert_header(header::ContentRange(
-                            format!("bytes */{}", file_size).parse().unwrap(),
+                            format!("bytes */{file_size}").parse().unwrap(),
                         ))
                         .finish());
                 }
