@@ -1,3 +1,4 @@
+use actix_web::HttpRequest;
 use chrono::{Duration, Utc};
 use jsonwebtoken::{DecodingKey, EncodingKey, Header, TokenData, Validation, decode, encode};
 use serde::{Deserialize, Serialize};
@@ -6,6 +7,20 @@ use serde::{Deserialize, Serialize};
 pub struct Claims {
     pub sub: u32,
     pub exp: usize,
+}
+
+pub fn get_token(req: HttpRequest) -> Option<String> {
+    match req.headers().get("Authorization") {
+        Some(header) => {
+            let bearer = header.to_str().unwrap_or_default();
+            if bearer.starts_with("Bearer ") {
+                Some(bearer.trim_start_matches("Bearer ").to_string())
+            } else {
+                None
+            }
+        }
+        None => None,
+    }
 }
 
 pub fn create_jwt(user_id: u32) -> Result<String, jsonwebtoken::errors::Error> {
