@@ -5,11 +5,14 @@
   --text: hsl(0 0% 95%);
   --text-muted: hsl(0 0% 70%);
   --purple: hsl(271 91% 55%);
+  --purple-light: hsl(271, 97%, 65%);
   --shadow: 0 0 5px rgba(255, 255, 255, 0.4);
   --box-shadow: 0px 2px 2px hsla(0, 0%, 95%, 0.07), 0px 4px 4px hsla(0, 0%, 95%, 0.15);
-  --grad-purple-green: linear-gradient(90deg,rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
+  --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
+  --transparent-bg-dark: hsla(0, 0%, 5%, 0.4);
   --transparent-bg: hsla(0, 0%, 10%, 0.4);
   --transparent-bg-light: hsla(0, 0%, 15%, 0.4);
+  --link: hsl(315, 91%, 55%);
 }
 
 body.light {
@@ -18,12 +21,15 @@ body.light {
   --bg-light: hsl(0 0% 95%);
   --text: hsl(0 0% 5%);
   --text-muted: hsl(0 0% 30%);
-  --purple: hsl(271 91% 55%);
+  --purple: hsl(271, 97%, 65%);
+  --purple-light: hsl(271 91% 55%);
   --shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   --box-shadow: 0px 2px 2px hsla(0, 0%, 0%, 0.07), 0px 4px 4px hsla(0, 0%, 0%, 0.15);
-  --grad-purple-green: linear-gradient(90deg,rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
+  --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
+  --transparent-bg-dark: hsla(0, 0%, 80%, 0.4);
   --transparent-bg: hsla(0, 0%, 85%, 0.4);
   --transparent-bg-light: hsla(0, 0%, 90%, 0.4);
+  --link: hsl(315, 91%, 55%);
 }
 
 @font-face {
@@ -31,7 +37,8 @@ body.light {
   src: url('../fonts/DaddyTimeMono/DaddyTimeMonoNerdFont-Regular.ttf');
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: mainFont, sans-serif;
@@ -57,8 +64,9 @@ header {
   height: 120px;
   width: 100%;
   text-align: center;
-  font-size : 20px;
+  font-size: 20px;
   display: flex;
+  box-shadow: var(--box-shadow);
   align-items: center;
   justify-content: space-between;
   text-align: initial;
@@ -70,7 +78,8 @@ header {
   align-items: center;
   background: hsla(0, 0%, 90%, 0.8);
   border-radius: 50px;
-  margin-left: 10px;:
+  margin-left: 10px;
+  box-shadow: var(--box-shadow);
 }
 
 .logo {
@@ -88,18 +97,18 @@ header {
 }
 
 nav {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .header-box {
-  display : flex;
+  display: flex;
   padding: 0 1em 0;
-  gap : 1em;
+  gap: 1em;
   justify-content: center;
 }
 
 .box {
-  background-color : var(--transparent-bg-light);
+  background-color: var(--transparent-bg-light);
   border-radius: 13px 5px;
   text-align: center;
   height: 30px;
@@ -107,6 +116,7 @@ nav {
   padding: 0 10px;
   line-height: 30px;
   white-space: nowrap;
+  box-shadow: var(--box-shadow);
 }
 
 .box:hover {
@@ -164,7 +174,7 @@ nav a {
   background: var(--grad-purple-green);
   height: 100%;
   width: 0%;
-  border-radius: 50px 50px 200px 200px; 
+  border-radius: 50px 50px 200px 200px;
   cursor: pointer;
   box-shadow: var(--shadow);
 }
@@ -183,6 +193,7 @@ nav a {
   top: 0%;
   left: 1%;
   max-width: 40%;
+  text-shadow: var(--shadow);
 }
 
 .audio-buttons {
@@ -204,6 +215,7 @@ nav a {
   cursor: pointer;
   transition: background 0.2s ease;
   color: var(--text);
+  box-shadow: var(--box-shadow);
 }
 
 .audio-btn:hover svg {
@@ -245,6 +257,7 @@ nav a {
   left: 70%;
   display: inline-block;
   margin: 1rem;
+  box-shadow: var(--box-shadow);
 }
 
 .playlist-toggle {
@@ -255,13 +268,15 @@ nav a {
   font-size: 0.95rem;
   cursor: pointer;
   border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-shadow: var(--shadow);
   transition: background-color 0.2s ease;
   font-family: mainFont, sans-serif;
+  width: 15em;
 }
 
 .playlist-toggle:hover {
-  background-color: var(--transparent-bg);
+  background-color: var(--purple);
 }
 
 .playlist-menu {
@@ -275,7 +290,8 @@ nav a {
   margin: 0;
   padding: 0;
   border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: var(--shadow);
   overflow: hidden;
   width: 180px;
 }
@@ -292,7 +308,7 @@ nav a {
 }
 
 .playlist-menu li:hover {
-  background-color: var(--transparent-light);
+  background-color: var(--purple);
 }
 
 .hidden {
@@ -313,12 +329,11 @@ nav a {
 #volume-slider {
   width: 100px;
   height: 14px;
-  accent-color: var(--grad-purple-green);
+  accent-color: var(--purple);
   cursor: pointer;
-
   position: absolute;
   left: 30px;
-  top: 47%;
+  top: 44%;
   transform: translateY(-50%);
   z-index: 10;
   box-shadow: var(--shadow);
@@ -340,6 +355,43 @@ button {
 
 audio {
   display: none;
+}
+
+.text-box {
+  display: grid;
+  padding: 0 1em 0;
+  gap: 1em;
+  justify-content: center;
+  margin-top: 5vh;
+  background-color: var(--transparent-bg-dark);
+  border-radius: 5px 13px;
+  box-shadow: var(--box-shadow);
+  padding: 0.5em;
+}
+
+.text-box p {
+  text-align: center;
+  text-shadow: var(--shadow);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.btn {
+  background-color: var(--purple);
+  text-shadow: var(--shadow);
+  box-shadow: var(--box-shadow);
+  color: var(--text);
+  border-radius: 13px;
+  font-family: mainFont, sans-serif;
+}
+
+.btn:hover {
+  background-color: var(--purple-light);
+}
+
+a {
+  color: var(--link);
+  text-shadow: var(--shadow);
 }
 
 @media screen and (max-width: 768px) {
@@ -401,7 +453,9 @@ audio {
     text-align: center;
   }
 
-  #previous, #play-pause, #next {
+  #previous,
+  #play-pause,
+  #next {
     position: static;
     margin: 0.5em;
   }
@@ -431,5 +485,3 @@ audio {
     margin: 1em 0;
   }
 }
-</style>
-
