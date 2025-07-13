@@ -294,6 +294,7 @@ nav a {
   text-shadow: var(--shadow);
   overflow: hidden;
   width: 14em;
+  text-align: center;
 }
 
 .playlist-menu li {
