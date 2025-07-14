@@ -370,11 +370,18 @@ audio {
   padding: 0.5em;
 }
 
+.text-box h2 {
+  padding: 0 0.8em 0;
+  text-shadow: var(--shadow);
+  color: var(--text);
+}
+
 .text-box p {
-  text-align: center;
+  text-align: left;
   text-shadow: var(--shadow);
   color: var(--text);
   white-space: nowrap;
+  padding: 0 1em 0;
 }
 
 .btn {
