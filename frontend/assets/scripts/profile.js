@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "https://becomes-colon-vinyl-luggage.trycloudflare.com/api";
 let isLogin = true;
 
 async function isTokenValid() {
@@ -11,15 +11,22 @@ async function isTokenValid() {
     }
   });
 
-  if (response.ok) { return hideModal() } else { return showModal() };
+  response.ok ? hideModal(await response.json()) : showModal();
 }
 
 function showModal() {
   document.getElementById('auth-modal').style.display = 'flex';
 }
 
-function hideModal() {
+function hideModal(user) {
   document.getElementById('auth-modal').style.display = 'none';
+
+  const info = `Email: ${user.email}
+First Name: ${user.first_name}
+Last Name: ${user.last_name}
+Created At: ${user.created_at}
+`
+  document.getElementById('user-info').innerText = info;
 }
 
 function toggleAuthMode() {
