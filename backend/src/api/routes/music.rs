@@ -1,5 +1,8 @@
-use crate::api::services::loader::{AppState, MusicInfo};
-use actix_web::{HttpResponse, Responder, get, http::header, web};
+use crate::api::services::{
+    jwt::{get_token, verify_jwt},
+    loader::{AppState, MusicInfo},
+};
+use actix_web::{HttpRequest, HttpResponse, Responder, get, http::header, web};
 use std::io::SeekFrom;
 use tokio::{
     fs::File,
@@ -7,10 +10,22 @@ use tokio::{
 };
 
 #[get("/")]
-pub async fn list(data: web::Data<AppState>) -> impl Responder {
-    let tracks = data.tracks.lock().unwrap();
-    let track_list: Vec<&MusicInfo> = tracks.values().collect();
-    HttpResponse::Ok().json(track_list)
+pub async fn list(data: web::Data<AppState>, req: HttpRequest) -> impl Responder {
+    let token = match get_token(req) {
+        Some(t) => t,
+        None => return HttpResponse::Unauthorized().body("Missing or invalid token"),
+    };
+    match verify_jwt(&token) {
+        Ok(_) => {
+            let tracks = data.tracks.lock().unwrap();
+            let track_list: Vec<&MusicInfo> = tracks.values().collect();
+            HttpResponse::Ok().json(track_list)
+        }
+        Err(e) => {
+            eprintln!("JWT Error: {e:?}");
+            HttpResponse::Unauthorized().body("Invalid token")
+        }
+    }
 }
 
 #[get("/{path:.*}")]
@@ -20,6 +35,14 @@ pub async fn stream(
     req: actix_web::HttpRequest,
     data: web::Data<AppState>,
 ) -> Result<HttpResponse, actix_web::Error> {
+    let token = match get_token(req.clone()) {
+        Some(t) => t,
+        None => return Ok(HttpResponse::Unauthorized().body("Missing or invalid token")),
+    };
+    if let Err(e) = verify_jwt(&token) {
+        eprintln!("JWT Error: {e:?}");
+        return Ok(HttpResponse::Unauthorized().body("Invalid token"));
+    }
     let req_path = path.into_inner();
     let tracks = data.tracks.lock().unwrap();
 
