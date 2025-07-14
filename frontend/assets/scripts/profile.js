@@ -64,11 +64,16 @@ async function handleAuthSubmit(event) {
 
   if (response.ok && data.token) {
     localStorage.setItem('jwt_token', `Bearer ${data.token}`);
-    hideModal();
+    hideModal(data);
     location.reload();
   } else {
     alert(data.message || 'Authentication failed.');
   }
+}
+
+async function remove_token() {
+  localStorage.removeItem('jwt_token');
+  location.reload();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
