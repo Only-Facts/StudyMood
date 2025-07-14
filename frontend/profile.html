@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyMood - Profile</title>
+  <link rel="stylesheet" href="assets/styles/default.css">
+  <link rel="icon" href="assets/img/StudyMoodlogo.png" type="image/x-icon">
+</head>
+
+<body>
+  <header>
+    <div class="header-logo">
+      <img src="assets/img/StudyMoodlogo2.png" alt="Weather Logo" class="logo" />
+    </div>
+
+    <div class="header-center">
+      <nav>
+        <div class="header-box">
+          <a href="/">
+            <div class="box">
+              Home
+            </div>
+          </a>
+          <a href="/stream">
+            <div class="box">
+              Stream
+            </div>
+          </a>
+          <a href="/profile">
+            <div class="box">
+              Profile
+            </div>
+          </a>
+        </div>
+      </nav>
+    </div>
+    <div class="header-spacer"></div>
+
+    <div id="color-mode">
+      <button onclick="toggle()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" id="svg-color">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="auth-modal">
+    <div id="auth-box">
+      <h2 id="auth-title">Login</h2>
+      <form id="auth-form">
+        <input type="text" id="fname" placeholder="First Name" style="display:none; margin-bottom:1em; width:100%;">
+        <input type="text" id="lname" placeholder="Last Name" style="display:none; margin-bottom:1em; width:100%;">
+        <input type="email" id="email" placeholder="Email" required
+          style="display:block; margin-bottom:1em; width:100%;">
+        <input type="password" id="password" placeholder="Password" required
+          style="display:block; margin-bottom:1em; width:100%;">
+        <button class="btn" type="submit" style="width:100%;">Submit</button>
+      </form>
+      <p style="margin-top:1em; text-align:center;">
+        <span id="toggle-auth">Don't have an account? Register</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="text-box">
+    <h2>User Info</h2>
+    <p class="user-info">...</p>
+  </div>
+</body>
+
+<script src="assets/scripts/theme.js"></script>
+<script src="assets/scripts/profile.js"></script>
+
+</html>
