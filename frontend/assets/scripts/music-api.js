@@ -75,6 +75,10 @@ async function fetchMusicList() {
   showStatus('Loading music...', 'loading');
   try {
     const response = await fetch(`${API_BASE_URL}/music/`);
+    if (response.status == 401) {
+      alert("You may login first.");
+      window.location.href = "/profile";
+    }
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     const tracks = await response.json();
 
