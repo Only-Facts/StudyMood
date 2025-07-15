@@ -22,9 +22,19 @@ function showStatus(message, type = '') {
   }
 }
 
-function loadTrack(index) {
+async function loadTrack(index) {
   const track = currentPlaylist[index];
-  const streamUrl = `${API_BASE_URL}/music/${encodeURIComponent(track.path)}`;
+  const token = localStorage.getItem('jwt_token');
+  const response = await fetch(`${API_BASE_URL}/music/${encodeURIComponent(track.path)}`, {
+    headers: {
+      'Authorization': token
+    }
+  });
+  if (!response.ok) {
+    showStatus('Failed to fetch stream URL:', response.status, response.statusText, 'error');
+    return;
+  }
+  const streamUrl = URL.createObjectURL(await response.blob());
   audioPlayer.src = streamUrl;
   audioPlayer.play();
   showStatus(`Playlist: ${currentPlaylistName} — Now playing: ${track.file}`);
@@ -74,7 +84,16 @@ function selectPlaylist(name) {
 async function fetchMusicList() {
   showStatus('Loading music...', 'loading');
   try {
-    const response = await fetch(`${API_BASE_URL}/music/`);
+    const token = localStorage.getItem('jwt_token');
+    if (!token) {
+      alert("You may login first.");
+      window.location.href = "/profile";
+    }
+    const response = await fetch(`${API_BASE_URL}/music/`, {
+      headers: {
+        'Authorization': token
+      }
+    });
     if (response.status == 401) {
       alert("You may login first.");
       window.location.href = "/profile";
