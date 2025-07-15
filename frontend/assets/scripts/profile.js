@@ -60,14 +60,17 @@ async function handleAuthSubmit(event) {
     body: JSON.stringify(body)
   });
 
-  const data = await response.json();
-
-  if (response.ok && data.token) {
+  if (response.status == 200) {
+    const data = await response.json();
     localStorage.setItem('jwt_token', `Bearer ${data.token}`);
     hideModal(data);
     location.reload();
   } else {
-    alert(data.message || 'Authentication failed.');
+    if (response.status == 401) {
+      alert("Authentication failed. Invalid Credentials");
+    } else {
+      alert(`Authentication failed. Error: ${response.status}`);
+    }
   }
 }
 
