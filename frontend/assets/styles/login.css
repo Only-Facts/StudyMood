@@ -1,0 +1,150 @@
+:root {
+  --bg-dark: hsl(0 0% 0%);
+  --bg: hsl(0 0% 5%);
+  --bg-light: hsl(0 0% 10%);
+  --text: hsl(0 0% 95%);
+  --text-muted: hsl(0 0% 70%);
+  --purple: hsl(271 91% 55%);
+  --purple-light: hsl(271, 97%, 65%);
+  --shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+  --box-shadow: 0px 2px 2px hsla(0, 0%, 95%, 0.07), 0px 4px 4px hsla(0, 0%, 95%, 0.15);
+  --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
+  --transparent-bg-dark: hsla(0, 0%, 5%, 0.4);
+  --transparent-bg: hsla(0, 0%, 10%, 0.4);
+  --transparent-bg-light: hsla(0, 0%, 15%, 0.4);
+  --link: hsl(315, 91%, 55%);
+}
+
+body.light {
+  --bg-dark: hsl(0 0% 85%);
+  --bg: hsl(0 0% 90%);
+  --bg-light: hsl(0 0% 95%);
+  --text: hsl(0 0% 5%);
+  --text-muted: hsl(0 0% 30%);
+  --purple: hsl(271, 97%, 65%);
+  --purple-light: hsl(271 91% 55%);
+  --shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  --box-shadow: 0px 2px 2px hsla(0, 0%, 0%, 0.07), 0px 4px 4px hsla(0, 0%, 0%, 0.15);
+  --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
+  --transparent-bg-dark: hsla(0, 0%, 80%, 0.4);
+  --transparent-bg: hsla(0, 0%, 85%, 0.4);
+  --transparent-bg-light: hsla(0, 0%, 90%, 0.4);
+  --link: hsl(315, 91%, 55%);
+}
+
+@font-face {
+  font-family: 'mainFont';
+  src: url('../fonts/DaddyTimeMono/DaddyTimeMonoNerdFont-Regular.ttf');
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  background: var(--bg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 0.2em;
+  height: 100px;
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: initial;
+  grid-row: 1;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  background: hsla(0, 0%, 30% 0);
+  border-radius: 35px;
+  margin-left: 15px;
+  margin-right: 3em;
+  box-shadow: var(--box-shadow);
+  height: 100px;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+  padding: 20px 0 0;
+}
+
+.header-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2.3em;
+}
+
+nav {
+  margin-top: 2px;
+}
+
+.header-box {
+  display: flex;
+  padding: 0 1em 0.5em;
+  gap: 1em;
+  justify-content: space-evenly;
+}
+
+
+.box {
+  background-color: var(--transparent-bg-light);
+  border-radius: 35px;
+  text-align: center;
+  height: 40px;
+  color: var(--text);
+  padding: 0 10px;
+  line-height: 40px;
+  white-space: nowrap;
+  width: 5em;
+  box-shadow: var(--box-shadow);
+}
+
+.box:hover {
+  background-color: var(--purple);
+  transition: background 0.2s ease;
+}
+
+nav a {
+  color: var(--text);
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.header-spacer {
+  flex-basis: 140px;
+}
+
+#color-mode button {
+  position: relative;
+  background: none;
+  margin-right: 1em;
+  font-size: 26px;
+}
+
+

@@ -55,7 +55,6 @@ body {
   color: var(--text);
   display: flex;
   flex-direction: column;
-  grid-template-rows: auto 1fr auto;
   align-items: center;
 }
 
@@ -530,15 +529,16 @@ a {
 }
 
 .purple-blob {
-  width: 800px;
-  height: 800px;
+  width: 50vw;
+  height: 50vw;
+  top: 15%;
+  left: 25%;
   background: radial-gradient(circle at 30% 30%, #a855f7, #7e22ce);
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: blob 10s infinite ease-in-out;
   position: absolute;
   overflow: hidden;
-  top: 160px;
-  left: 450px;
+  pointer-events: none;
   z-index: -1;
 }
 
@@ -553,3 +553,14 @@ a {
     border-radius: 40% 60% 70% 30% / 50% 60% 30% 60%;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .purple-blob {
+    width: 100vw;
+    height: 100vw;
+    top: 50vh;
+    left: 0vw;
+  position: center;
+  }
+}
+
