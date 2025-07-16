@@ -19,11 +19,18 @@ function showModal() {
 
 function hideModal(user) {
   document.getElementById('auth-modal').style.display = 'none';
+  const date = new Date(user.created_at);
+
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+
+  const createdAt = `${day}/${month}/${year}`
 
   const info = `Email: ${user.email}
 First Name: ${user.first_name}
 Last Name: ${user.last_name}
-Created At: ${user.created_at}
+Created the ${createdAt}
 `
   document.getElementById('user-info').innerText = info;
 }
@@ -40,8 +47,6 @@ function toggleAuthMode() {
 }
 
 async function handleAuthSubmit() {
-  console.error("eengrj");
-  //event.preventDefault();
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
