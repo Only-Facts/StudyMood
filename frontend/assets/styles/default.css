@@ -532,7 +532,7 @@ a {
 .purple-blob {
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle at 30% 30%, #a855f7, #7e22ce);
+  background: radial-gradient(circle at 30% 30%, var(--purple-light), var(--purple));
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: blob 10s infinite ease-in-out;
   position: absolute;
