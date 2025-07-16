@@ -57,7 +57,7 @@
           style="display:block; margin-bottom:1em; width:100%;">
         <input type="password" id="password" placeholder="Password" required
           style="display:block; margin-bottom:1em; width:100%;">
-        <button class="btn" type="submit" style="width:100%;">Submit</button>
+        <button class="btn" type="submit" style="width:100%;" onclick="handleAuthSubmit()">Submit</button>
       </form>
       <p style="margin-top:1em; text-align:center;">
         <span id="toggle-auth">Don't have an account? Register</span>
@@ -71,9 +71,24 @@
   </div>
 
   <button onclick="remove_token()">Disconnect</button>
+
+  <button onclick="loadTodos()">Load Todos</button>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Time</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="todo-body">
+    </tbody>
+  </table>
 </body>
 
 <script src="assets/scripts/theme.js"></script>
 <script src="assets/scripts/profile.js"></script>
+<script src="assets/scripts/todos.js"></script>
 
 </html>
