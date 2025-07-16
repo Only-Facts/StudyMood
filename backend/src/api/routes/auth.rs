@@ -6,17 +6,17 @@ use sea_orm::{ColumnTrait, DatabaseConnection, EntityTrait, QueryFilter};
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
-pub struct RegisterRequest {
-    pub email: String,
-    pub password: String,
-    pub fname: String,
-    pub lname: String,
+struct RegisterRequest {
+    email: String,
+    password: String,
+    fname: String,
+    lname: String,
 }
 
 #[derive(Debug, Deserialize)]
-pub struct LoginRequest {
-    pub email: String,
-    pub password: String,
+struct LoginRequest {
+    email: String,
+    password: String,
 }
 
 #[post("/register")]
