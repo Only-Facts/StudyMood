@@ -1,4 +1,3 @@
-const API_BASE_URL = "https://becomes-colon-vinyl-luggage.trycloudflare.com/api";
 let isLogin = true;
 
 async function isTokenValid() {
@@ -40,8 +39,9 @@ function toggleAuthMode() {
   document.getElementById('lname').style.display = isLogin ? 'none' : 'block';
 }
 
-async function handleAuthSubmit(event) {
-  event.preventDefault();
+async function handleAuthSubmit() {
+  console.error("eengrj");
+  //event.preventDefault();
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
 
