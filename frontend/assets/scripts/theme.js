@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://activated-wed-wooden-showed.trycloudflare.com/api";
 function toggle() {
   document.body.classList.toggle("light");
   const svg = document.getElementById("svg-color");
