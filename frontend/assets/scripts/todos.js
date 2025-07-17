@@ -74,6 +74,7 @@ async function loadTodos() {
             <button onclick="deleteTodo(${todo.id})">Delete</button>
           `;
 
+      tbody.innerHTML = '';
       tbody.appendChild(row);
       tbody.appendChild(button);
     });
