@@ -27,59 +27,70 @@ async function deleteTodo(id) {
   }
 }
 
+let isOpen = true;
+
 async function loadTodos() {
-  try {
-    const token = localStorage.getItem('jwt_token');
-
-    if (!token) {
-      alert("No Token Found. You may login first.");
-      window.location.href = "/profile";
-    }
-    const response = await fetch(`${API_BASE_URL}/todos/`, {
-      method: 'GET',
-      headers: {
-        'Authorization': token
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error('HTTP Error: ' + response.status);
-    }
-
-    const todos = await response.json();
+  isOpen = !isOpen;
+  const todos = document.getElementById('todos');
+  if (isOpen) {
     const tbody = document.getElementById('todo-body');
     tbody.innerHTML = '';
+    todos.style.display = 'none';
+  } else {
+    todos.style.display = 'block';
+    try {
+      const token = localStorage.getItem('jwt_token');
 
-    todos.forEach(todo => {
-      const row = document.createElement('tr');
-      const date = new Date(todo.dtime);
+      if (!token) {
+        alert("No Token Found. You may login first.");
+        window.location.href = "/profile";
+      }
+      const response = await fetch(`${API_BASE_URL}/todos/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': token
+        }
+      });
 
-      const year = date.getFullYear();
-      const month = (date.getMonth() + 1).toString().padStart(2, '0');
-      const day = date.getDate().toString().padStart(2, '0');
+      if (!response.ok) {
+        throw new Error('HTTP Error: ' + response.status);
+      }
 
-      const hour = date.getHours().toString().padStart(2, '0');
-      const min = date.getMinutes().toString().padStart(2, '0');
-      const sec = date.getSeconds().toString().padStart(2, '0');
+      const todos = await response.json();
+      const tbody = document.getElementById('todo-body');
+      tbody.innerHTML = '';
 
-      const dueTime = `${day}/${month}/${year} at ${hour}:${min}:${sec}`
+      todos.forEach(todo => {
+        const row = document.createElement('tr');
+        const date = new Date(todo.dtime);
 
-      row.innerHTML = `
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+
+        const hour = date.getHours().toString().padStart(2, '0');
+        const min = date.getMinutes().toString().padStart(2, '0');
+        const sec = date.getSeconds().toString().padStart(2, '0');
+
+        const dueTime = `${day}/${month}/${year} at ${hour}:${min}:${sec}`
+
+        row.innerHTML = `
             <td>${todo.title}</td>
             <td>${todo.descr}</td>
             <td>${dueTime}</td>
             <td>${todo.status}</td>
           `;
-      const button = document.createElement('div');
-      button.innerHTML = `
+        const button = document.createElement('div');
+        button.innerHTML = `
             <button onclick="deleteTodo(${todo.id})">Delete</button>
           `;
 
-      tbody.appendChild(row);
-      tbody.appendChild(button);
-    });
-  } catch (err) {
-    console.error('Error while loading todos :', err);
-    document.body.innerHTML += `<p style="color:red;">Erreur : ${err.message}</p>`;
+        tbody.appendChild(row);
+        tbody.appendChild(button);
+      });
+    } catch (err) {
+      console.error('Error while loading todos :', err);
+      document.body.innerHTML += `<p style="color:red;">Erreur : ${err.message}</p>`;
+    }
   }
 }
