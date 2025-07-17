@@ -48,6 +48,7 @@ async function loadTodos() {
 
     const todos = await response.json();
     const tbody = document.getElementById('todo-body');
+    tbody.innerHTML = '';
 
     todos.forEach(todo => {
       const row = document.createElement('tr');
@@ -74,7 +75,6 @@ async function loadTodos() {
             <button onclick="deleteTodo(${todo.id})">Delete</button>
           `;
 
-      tbody.innerHTML = '';
       tbody.appendChild(row);
       tbody.appendChild(button);
     });
