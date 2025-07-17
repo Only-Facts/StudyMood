@@ -3,6 +3,7 @@
   --bg: hsl(0 0% 5%);
   --invbg: hsl(0 0% 80%);
   --bg-light: hsl(0 0% 10%);
+  --box: #222;
   --text: hsl(0 0% 95%);
   --text-muted: hsl(0 0% 70%);
   --purple: hsl(271 91% 55%);
@@ -31,6 +32,7 @@ body.light {
   --bg: hsl(0 0% 90%);
   --invbg: hsl(0 0% 10%);
   --bg-light: hsl(0 0% 95%);
+  --box: #fff;
   --text: hsl(0 0% 5%);
   --text-muted: hsl(0 0% 30%);
   --purple: hsl(271, 97%, 65%);
@@ -158,7 +160,7 @@ nav a {
 }
 
 .container {
-  background: #fff;
+  background: var(--box);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   position: relative;
@@ -167,11 +169,10 @@ nav a {
   min-height: 480px;
   overflow: hidden;
   display: flex;
-  margin: 40px 0; /* some spacing from header */
+  margin: 40px 0;
   box-sizing: border-box;
 }
 
-/* Form containers */
 .form-container {
   position: absolute;
   top: 0;
@@ -185,7 +186,6 @@ nav a {
   width: 50%;
   text-align: center;
   z-index: 5;
-  background: #fff;
   box-sizing: border-box;
   box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
 }
@@ -194,7 +194,7 @@ nav a {
   font-weight: 600;
   margin-bottom: 20px;
   font-size: 24px;
-  color: var(--clr-text-dark);
+  color: var(--clr-text);
 }
 
 .input-box {
@@ -240,16 +240,18 @@ nav a {
   font-size: 12px;
   color: var(--clr-purple-end);
   text-decoration: none;
-  margin: 10px 0 0;
   display: inline-block;
   transition: color 0.3s ease;
+  display: block;
+  margin-top: 2em;
+  text-align: center;
+  width: 100%;
 }
 
 .forget-link:hover {
   color: var(--clr-purple-start);
 }
 
-/* Sign-in form initial styles */
 .sign-in {
   left: 0;
   width: 50%;
@@ -259,7 +261,6 @@ nav a {
   transition: var(--transition);
 }
 
-/* Sign-up form initial styles (off right) */
 .sign-up {
   left: 50%;
   width: 50%;
@@ -269,13 +270,13 @@ nav a {
   transition: var(--transition);
 }
 
-/* Active container - show sign up, hide sign in */
 .container.active .sign-in {
   left: 0;
   width: 50%;
   opacity: 0;
   z-index: 1;
   transform: translateX(-100%);
+  align-items: center;
   transition-delay: 0s;
 }
 
@@ -288,7 +289,6 @@ nav a {
   transition-delay: 0.6s;
 }
 
-/* Toggle container and panels */
 .toggle-container {
   position: absolute;
   top: 0;
@@ -361,7 +361,7 @@ nav a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   padding-left: 40px;
 }
 
@@ -369,7 +369,7 @@ nav a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   padding-right: 40px;
 }
 
