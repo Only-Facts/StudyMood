@@ -32,12 +32,15 @@ let isOpen = true;
 async function loadTodos() {
   isOpen = !isOpen;
   const todos = document.getElementById('todos');
+  const btn = document.getElementById('todos-btn');
   if (isOpen) {
     const tbody = document.getElementById('todo-body');
     tbody.innerHTML = '';
     todos.style.display = 'none';
+    btn.innerText = 'Load Todos'
   } else {
     todos.style.display = 'block';
+    btn.innerText = 'Unload Todos'
     try {
       const token = localStorage.getItem('jwt_token');
 
