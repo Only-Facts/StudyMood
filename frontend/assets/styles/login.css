@@ -52,7 +52,7 @@ body.light {
   box-shadow: var(--shadow);
   position: relative;
   max-width: 768px;
-  width: 70vh;
+  width: 70vw;
   min-height: 480px;
   overflow: hidden;
   display: flex;
@@ -84,16 +84,22 @@ body.light {
   color: var(--clr-text);
 }
 
-.input-box {
+.form-container .form {
   width: 90%;
-  margin: 10px 0;
+  justify-content: center;
+  display: grid;
+}
+
+.input-box {
+  width: 100%;
+  margin: 0.3em 0;
+  max-width: 100%;
 }
 
 .form-container input {
   background: #eee;
   border: none;
-  padding: 12px 15px;
-  width: 100%;
+  padding: 0.6em 0.7em;
   border-radius: 20px;
   font-size: 14px;
   color: var(--clr-text-dark);
@@ -112,7 +118,7 @@ body.light {
   display: inline-block;
   transition: color 0.3s ease;
   display: block;
-  margin-top: 2em;
+  margin: 1em 0 1em;
   text-align: center;
   width: 100%;
 }
