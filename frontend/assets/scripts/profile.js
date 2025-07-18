@@ -1,18 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("container");
-  const loginBtn = document.getElementById("login");
-  const registerBtn = document.getElementById("register");
-
-  registerBtn.addEventListener("click", () => {
-    container.classList.remove("active");
-  });
-
-  loginBtn.addEventListener("click", () => {
-    container.classList.add("active");
-  });
-});
-let isLogin = true;
-
 async function isTokenValid() {
   const token = localStorage.getItem('jwt_token');
   if (!token) return showModal();
@@ -47,29 +32,42 @@ Created the ${createdAt}
   document.getElementById('user-info').innerText = info;
 }
 
-function toggleAuthMode() {
-  isLogin = !isLogin;
-  document.getElementById('auth-title').innerText = isLogin ? 'Login' : 'Register';
-  document.getElementById('toggle-auth').innerText = isLogin
-    ? "Don't have an account? Register"
-    : "Already have an account? Login";
+async function handleRegisterSubmit(event) {
+  event.preventDefault();
+  const email = document.getElementById('email-register').value.trim();
+  const password = document.getElementById('password-register').value.trim();
+  const username = document.getElementById('username').value.trim();
 
-  document.getElementById('username').style.display = isLogin ? 'none' : 'block';
+  const body = { email, password, username };
+
+  const response = await fetch(`${API_BASE_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+
+  if (response.status == 200) {
+    const data = await response.json();
+    localStorage.setItem('jwt_token', `Bearer ${data.token}`);
+    hideModal(data);
+    location.reload();
+  } else {
+    if (response.status == 401) {
+      alert("Authentication failed. Invalid Credentials");
+    } else {
+      alert(`Authentication failed. Error: ${response.status}`);
+    }
+  }
 }
 
-async function handleAuthSubmit() {
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
+async function handleLoginSubmit(event) {
+  event.preventDefault();
+  const email = document.getElementById('email-login').value.trim();
+  const password = document.getElementById('password-login').value.trim();
 
   const body = { email, password };
 
-  if (!isLogin) {
-    body.username = document.getElementById('username').value.trim();
-  }
-
-  const endpoint = isLogin ? '/auth/login' : '/auth/register';
-
-  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
@@ -97,6 +95,17 @@ async function remove_token() {
 document.addEventListener('DOMContentLoaded', () => {
   isTokenValid();
 
-  document.getElementById('auth-form').addEventListener('submit', handleAuthSubmit);
-  document.getElementById('toggle-auth').addEventListener('click', toggleAuthMode);
+  document.getElementById('login-form').addEventListener('submit', handleLoginSubmit);
+  document.getElementById('register-form').addEventListener('submit', handleRegisterSubmit);
+  const container = document.getElementById("container");
+  const loginBtn = document.getElementById("login");
+  const registerBtn = document.getElementById("register");
+
+  registerBtn.addEventListener("click", () => {
+    container.classList.remove("active");
+  });
+
+  loginBtn.addEventListener("click", () => {
+    container.classList.add("active");
+  });
 });
