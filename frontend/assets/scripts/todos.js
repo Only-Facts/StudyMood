@@ -97,3 +97,44 @@ async function loadTodos() {
     }
   }
 }
+
+async function addTodo(event) {
+  event.preventDefault();
+
+  const token = localStorage.getItem('jwt_token');
+
+  if (!token) {
+    alert("No Token Found. You may login first.");
+    window.location.href = "/profile";
+  }
+
+  const title = document.getElementById('title').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const dtimeInput = document.getElementById('dtime').value.trim();
+  let status = document.getElementById('status').value.trim();
+
+  const localDate = new Date(dtimeInput);
+  const dtime = localDate.toISOString();
+
+  status = status == "" ? "Not Started" : `${status}`
+
+  const body = { title, description, dtime, status };
+
+  const response = await fetch(`${API_BASE_URL}/todos/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    },
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    alert('HTTP Error: ' + response.status);
+  }
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('add-todo').addEventListener('submit', addTodo);
+});
