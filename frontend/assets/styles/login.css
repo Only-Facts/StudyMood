@@ -8,6 +8,7 @@
   --text-muted: hsl(0 0% 70%);
   --purple: hsl(271 91% 55%);
   --purple-light: hsl(271, 97%, 65%);
+  --purple-dark: hsl(260, 100%, 44%);
   --shadow: 0 0 5px rgba(255, 255, 255, 0.4);
   --box-shadow: 0px 2px 2px hsla(0, 0%, 95%, 0.07), 0px 4px 4px hsla(0, 0%, 95%, 0.15);
   --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
@@ -16,13 +17,12 @@
   --transparent-bg-light: hsla(0, 0%, 15%, 0.4);
   --link: hsl(315, 91%, 55%);
   --clr-purple-start: #8e2de2;
-  --clr-purple-end: #4a00e0;
   --clr-light-purple: #b388ff;
   --clr-white: #fff;
   --clr-bg: #f6f5f7;
   --clr-text-dark: #333;
   --clr-text-light: #777;
-  --shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  --shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   --border-radius: 10px;
   --transition: all 0.6s ease-in-out;
 }
@@ -46,126 +46,13 @@ body.light {
   --link: hsl(315, 91%, 55%);
 }
 
-@font-face {
-  font-family: 'mainFont';
-  src: url('../fonts/DaddyTimeMono/DaddyTimeMonoNerdFont-Regular.ttf');
-}
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  font-family: "poppins", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-body {
-  background: var(--bg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-header {
-  background-color: var(--bg);
-  color: var(--text);
-  padding: 0.2em;
-  height: 100px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
-.header-logo {
-  display: flex;
-  align-items: center;
-  background: hsla(0, 0%, 30%, 0);
-  border-radius: 35px;
-  margin-left: 15px;
-  margin-right: 3em;
-  box-shadow: var(--box-shadow);
-  height: 100px;
-}
-
-.logo {
-  height: 60px;
-  width: auto;
-  padding: 20px 0 0;
-}
-
-.header-center {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-left: 2.3em;
-}
-
-nav {
-  margin-top: 2px;
-}
-
-.header-box {
-  display: flex;
-  padding: 0 1em 0.5em;
-  gap: 1em;
-  justify-content: space-evenly;
-}
-
-.box {
-  background-color: var(--transparent-bg-light);
-  border-radius: 35px;
-  text-align: center;
-  height: 40px;
-  color: var(--text);
-  padding: 0 10px;
-  line-height: 40px;
-  white-space: nowrap;
-  width: 5em;
-  box-shadow: var(--box-shadow);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.box:hover {
-  background-color: var(--purple);
-}
-
-nav a {
-  color: var(--text);
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.header-spacer {
-  flex-basis: 140px;
-}
-
-#color-mode button {
-  position: relative;
-  background: none;
-  margin-right: 1em;
-  font-size: 26px;
-  cursor: pointer;
-}
-
 .container {
   background: var(--box);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   position: relative;
-  width: 768px;
-  max-width: 100%;
+  max-width: 768px;
+  width: 70vh;
   min-height: 480px;
   overflow: hidden;
   display: flex;
@@ -187,7 +74,7 @@ nav a {
   text-align: center;
   z-index: 5;
   box-sizing: border-box;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .form-container h2 {
@@ -218,27 +105,9 @@ nav a {
   background-color: #ddd;
 }
 
-.btn {
-  border-radius: 20px;
-  border: none;
-  background: var(--clr-purple-start);
-  color: var(--clr-white);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 12px 45px;
-  margin-top: 20px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  box-shadow: 0 5px 10px rgba(142,45,226,0.4);
-}
-
-.btn:hover {
-  background: var(--clr-purple-end);
-}
-
 .forget-link {
   font-size: 12px;
-  color: var(--clr-purple-end);
+  color: var(--purple-dark);
   text-decoration: none;
   display: inline-block;
   transition: color 0.3s ease;
@@ -303,7 +172,7 @@ nav a {
 }
 
 .toggle {
-  background: linear-gradient(90deg, var(--clr-purple-start), var(--clr-purple-end));
+  background: linear-gradient(90deg, var(--clr-purple-start), var(--purple-dark));
   color: var(--clr-white);
   height: 100%;
   width: 200%;
@@ -347,14 +216,13 @@ nav a {
   color: var(--clr-white);
   font-size: 14px;
   font-weight: 600;
-  padding: 12px 45px;
   cursor: pointer;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 .toggle-panel button:hover {
   background: var(--clr-white);
-  color: var(--clr-purple-end);
+  color: var(--purple-dark);
 }
 
 .toggle-left {
@@ -372,4 +240,3 @@ nav a {
   align-items: center;
   padding-right: 40px;
 }
-
