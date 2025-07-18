@@ -16,14 +16,12 @@ pub async fn add_user(
     db: &DatabaseConnection,
     email: &str,
     password: &str,
-    first_name: &str,
-    last_name: &str,
+    username: &str,
 ) -> Result<user::Model, sea_orm::DbErr> {
     let new_user = user::ActiveModel {
         email: Set(email.to_owned()),
         password: Set(password.to_owned()),
-        first_name: Set(first_name.to_owned()),
-        last_name: Set(last_name.to_owned()),
+        username: Set(username.to_owned()),
         ..Default::default()
     };
 
