@@ -55,7 +55,6 @@ body {
   color: var(--text);
   display: flex;
   flex-direction: column;
-  grid-template-rows: auto 1fr auto;
   align-items: center;
 }
 
@@ -530,15 +529,16 @@ a {
 }
 
 .purple-blob {
-  width: 800px;
-  height: 800px;
+  width: 100vw;
+  height: 100vw;
+  top: 50vh;
+  left: 0wh;
   background: radial-gradient(circle at 30% 30%, var(--purple-light), var(--purple));
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: blob 10s infinite ease-in-out;
-  position: absolute;
+  position: center;
   overflow: hidden;
-  top: 160px;
-  left: 450px;
+  pointer-events: none;
   z-index: -1;
 }
 

@@ -1,3 +1,16 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("container");
+  const loginBtn = document.getElementById("login");
+  const registerBtn = document.getElementById("register");
+
+  registerBtn.addEventListener("click", () => {
+    container.classList.remove("active");
+  });
+
+  loginBtn.addEventListener("click", () => {
+    container.classList.add("active");
+  });
+});
 let isLogin = true;
 
 async function isTokenValid() {
@@ -87,4 +100,3 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('auth-form').addEventListener('submit', handleAuthSubmit);
   document.getElementById('toggle-auth').addEventListener('click', toggleAuthMode);
 });
-
