@@ -6,6 +6,7 @@
   --text-muted: hsl(0 0% 70%);
   --purple: hsl(271 91% 55%);
   --purple-light: hsl(271, 97%, 65%);
+  --purple-dark: hsl(260, 100%, 44%);
   --shadow: 0 0 5px rgba(255, 255, 255, 0.4);
   --box-shadow: 0px 2px 2px hsla(0, 0%, 95%, 0.07), 0px 4px 4px hsla(0, 0%, 95%, 0.15);
   --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
@@ -23,6 +24,7 @@ body.light {
   --text-muted: hsl(0 0% 30%);
   --purple: hsl(271, 97%, 65%);
   --purple-light: hsl(271 91% 55%);
+  --purple-dark: hsl(260, 100%, 44%);
   --shadow: 0 0 5px rgba(0, 0, 0, 0.4);
   --box-shadow: 0px 2px 2px hsla(0, 0%, 0%, 0.07), 0px 4px 4px hsla(0, 0%, 0%, 0.15);
   --grad-purple-green: linear-gradient(90deg, rgba(146, 42, 155, 1) 0%, rgba(87, 111, 199, 1) 66%, rgba(83, 237, 222, 1) 100%);
@@ -44,6 +46,7 @@ body {
   font-family: "poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -63,7 +66,7 @@ header {
   color: var(--text);
   padding: 0.2em;
   height: 100px;
-  width: 100%;
+  width: 100vw;
   text-align: center;
   font-size: 20px;
   display: flex;
@@ -71,6 +74,8 @@ header {
   justify-content: space-between;
   text-align: initial;
   grid-row: 1;
+  z-index: 9999;
+  position: fixed;
 }
 
 .header-logo {
@@ -366,7 +371,7 @@ audio {
   gap: 1em;
   justify-content: center;
   position: relative;
-  margin-top: 25vh;
+  margin-top: 35vh;
   background-color: transparent;
   align-items: center;
   padding: 0.5em;
@@ -387,20 +392,23 @@ audio {
 }
 
 .btn {
+  background: var(--purple-light);
   background-color: var(--purple);
   margin: 0 auto 0;
   text-shadow: var(--shadow);
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 5px 10px rgba(142, 45, 226, 0.4);
   color: var(--text);
   border-radius: 35px;
   width: 10em;
   height: 40px;
   font-family: "poppins", sans-serif;
-  transition: background 0.2s ease;
+  transition: background 0.3s ease;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .btn:hover {
-  background-color: var(--purple-light);
+  background: var(--purple-dark);
 }
 
 a {
@@ -419,7 +427,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 9998;
 }
 
 #auth-box {
@@ -434,33 +442,66 @@ a {
   cursor: pointer;
 }
 
+.purple-blob {
+  width: 50%;
+  height: 70%;
+  top: 15%;
+  left: 25%;
+  background: radial-gradient(circle at 30% 30%, var(--purple-light), var(--purple));
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: blob 10s infinite ease-in-out;
+  position: fixed;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
 @media screen and (max-width: 768px) {
   header {
-    flex-direction: column;
+    flex-direction: flex;
     height: auto;
     padding: 2em 0.5em;
   }
 
   .header-logo {
-    margin: 0.5em 0;
+    margin: 0 0.6em 0;
+    max-height: 5vh;
+  }
+
+  .logo {
+    max-width: 100%;
+    max-height: 90%;
+    padding: 0;
   }
 
   .header-center {
-    height: auto;
-    margin: auto;
+    max-height: 50vh;
     text-align: center;
     align-items: center;
     position: relative;
+    width: auto;
+    margin-left: 1em;
+  }
+
+  nav {
+    max-height: 50vh;
+    width: auto;
   }
 
   .header-box {
-    flex-direction: column;
-    gap: 0.5em;
+    max-height: 10vh;
+    width: auto;
+    gap: 0;
   }
 
   .box {
-    height: auto;
+    gap: 0;
     padding: 0.5em 1em;
+    max-height: 5vh;
+    width: auto;
+    line-height: 5vh;
+    font-size: 50%;
   }
 
   .header-spacer {
@@ -526,20 +567,17 @@ a {
   #audio-progress {
     margin: 1em 0;
   }
-}
 
-.purple-blob {
-  width: 100vw;
-  height: 100vw;
-  top: 50vh;
-  left: 0wh;
-  background: radial-gradient(circle at 30% 30%, var(--purple-light), var(--purple));
-  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  animation: blob 10s infinite ease-in-out;
-  position: center;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: -1;
+  .purple-blob {
+    width: 80%;
+    height: 70%;
+    top: 20%;
+    left: 10%;
+  }
+
+  .text-box {
+    margin-top: 25vh;
+  }
 }
 
 @keyframes blob {
