@@ -371,7 +371,7 @@ audio {
   gap: 1em;
   justify-content: center;
   position: relative;
-  margin-top: 35vh;
+  margin-top: calc(25vh + 100px);
   background-color: transparent;
   align-items: center;
   padding: 0.5em;
@@ -445,7 +445,7 @@ a {
 .purple-blob {
   width: 50%;
   height: 70%;
-  top: 15%;
+  margin-top: calc(5vh + 100px);
   left: 25%;
   background: radial-gradient(circle at 30% 30%, var(--purple-light), var(--purple));
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
@@ -460,7 +460,7 @@ a {
 @media screen and (max-width: 768px) {
   header {
     flex-direction: flex;
-    height: auto;
+    height: 60px;
     padding: 2em 0.5em;
   }
 
@@ -571,7 +571,7 @@ a {
   .purple-blob {
     width: 80%;
     height: 70%;
-    top: 20%;
+    margin-top: calc(60px + 8vh);
     left: 10%;
   }
 
