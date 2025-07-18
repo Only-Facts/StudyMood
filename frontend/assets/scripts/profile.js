@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     container.classList.add("active");
   });
 });
-
 let isLogin = true;
 
 async function isTokenValid() {
@@ -42,8 +41,7 @@ function hideModal(user) {
   const createdAt = `${day}/${month}/${year}`
 
   const info = `Email: ${user.email}
-First Name: ${user.first_name}
-Last Name: ${user.last_name}
+Username: ${user.username}
 Created the ${createdAt}
 `
   document.getElementById('user-info').innerText = info;
@@ -56,8 +54,7 @@ function toggleAuthMode() {
     ? "Don't have an account? Register"
     : "Already have an account? Login";
 
-  document.getElementById('fname').style.display = isLogin ? 'none' : 'block';
-  document.getElementById('lname').style.display = isLogin ? 'none' : 'block';
+  document.getElementById('username').style.display = isLogin ? 'none' : 'block';
 }
 
 async function handleAuthSubmit() {
@@ -67,8 +64,7 @@ async function handleAuthSubmit() {
   const body = { email, password };
 
   if (!isLogin) {
-    body.fname = document.getElementById('fname').value.trim();
-    body.lname = document.getElementById('lname').value.trim();
+    body.username = document.getElementById('username').value.trim();
   }
 
   const endpoint = isLogin ? '/auth/login' : '/auth/register';

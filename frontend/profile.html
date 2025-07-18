@@ -46,13 +46,13 @@
         <form id="register-form">
           <h2>Create Account</h2>
           <div class="input-box">
-            <input type="text" placeholder="Username" required />
+            <input type="text" placeholder="Username" id="username" required />
           </div>
           <div class="input-box">
-            <input type="email" placeholder="Email" required />
+            <input type="email" placeholder="Email" id="email" required />
           </div>
           <div class="input-box">
-            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Password" id="password" required />
           </div>
           <button class="btn" type="submit">Register</button>
         </form>
@@ -88,10 +88,28 @@
       </div>
     </div>
   </main>
+  
+  <button onclick="remove_token()" class="btn">Disconnect</button>
 
-  <script src="assets/scripts/theme.js"></script>
-  <script src="assets/scripts/profile.js"></script>
+  <button onclick="loadTodos()" class="btn" id="todos-btn">Load Todos</button>
+  <table border="1" id="todos" style="display:none">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Time</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="todo-body">
+    </tbody>
+  </table>
 </body>
+
+<script src="assets/scripts/theme.js"></script>
+<script src="assets/scripts/profile.js"></script>
+<script src="assets/scripts/todos.js"></script>
+<script src="assets/scripts/api.js"></script>
 
 </html>
 

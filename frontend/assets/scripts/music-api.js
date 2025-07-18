@@ -1,4 +1,3 @@
-const API_BASE_URL = "https://becomes-colon-vinyl-luggage.trycloudflare.com/api";
 const audioPlayer = document.getElementById('audio');
 const statusMessageElement = document.getElementById('status-message');
 const prevBtn = document.getElementById("previous");

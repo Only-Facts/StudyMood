@@ -529,14 +529,14 @@ a {
 }
 
 .purple-blob {
-  width: 50vw;
-  height: 50vw;
-  top: 15%;
-  left: 25%;
-  background: radial-gradient(circle at 30% 30%, #a855f7, #7e22ce);
+  width: 100vw;
+  height: 100vw;
+  top: 50vh;
+  left: 0wh;
+  background: radial-gradient(circle at 30% 30%, var(--purple-light), var(--purple));
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   animation: blob 10s infinite ease-in-out;
-  position: absolute;
+  position: center;
   overflow: hidden;
   pointer-events: none;
   z-index: -1;
@@ -554,13 +554,7 @@ a {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .purple-blob {
-    width: 100vw;
-    height: 100vw;
-    top: 50vh;
-    left: 0vw;
-  position: center;
-  }
+.container {
+  text-align: center;
+  font-size: 20px;
 }
-

@@ -13,6 +13,8 @@ use sea_orm::DatabaseConnection;
 use services::loader;
 use std::{path::PathBuf, sync::Mutex};
 
+use crate::api::routes::todo;
+
 const MUSIC_DIRECTORY_ENV_VAR: &str = "MUSIC_DIR";
 
 #[get("/")]
@@ -77,6 +79,22 @@ pub async fn api() -> std::io::Result<()> {
                     .app_data(conn.clone())
                     .service(user::show_users)
                     .service(user::show_user),
+            )
+            .service(
+                web::scope("/todos")
+                    .wrap(
+                        Cors::permissive()
+                            .allow_any_origin()
+                            .allow_any_method()
+                            .allow_any_header()
+                            .max_age(3600),
+                    )
+                    .app_data(conn.clone())
+                    .service(todo::get_all_todos)
+                    .service(todo::get_todos)
+                    .service(todo::add_todo)
+                    .service(todo::update_todo)
+                    .service(todo::delete_todo),
             )
             .service(
                 web::scope("/auth")

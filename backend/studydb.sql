@@ -9,8 +9,7 @@ CREATE TABLE IF NOT EXISTS user (
     email VARCHAR(255) NOT NULL,
     pass VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    fname VARCHAR(255) NOT NULL,
-    lname VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
     UNIQUE (email)
 );
 
