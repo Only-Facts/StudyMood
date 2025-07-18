@@ -10,10 +10,7 @@ pub struct Model {
     #[sea_orm(column_name = "pass")]
     pub password: String,
     pub created_at: Option<DateTimeUtc>,
-    #[sea_orm(column_name = "fname")]
-    pub first_name: String,
-    #[sea_orm(column_name = "lname")]
-    pub last_name: String,
+    pub username: String,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter)]
