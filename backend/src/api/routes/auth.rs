@@ -9,8 +9,7 @@ use serde::Deserialize;
 struct RegisterRequest {
     email: String,
     password: String,
-    fname: String,
-    lname: String,
+    username: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -33,8 +32,7 @@ pub async fn register_user(
         conn.get_ref(),
         &form.email.clone(),
         &hashed,
-        &form.fname.clone(),
-        &form.lname.clone(),
+        &form.username.clone(),
     )
     .await
     {
