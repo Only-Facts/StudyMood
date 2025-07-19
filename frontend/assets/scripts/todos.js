@@ -82,14 +82,10 @@ async function loadTodos() {
             <td>${todo.descr}</td>
             <td>${dueTime}</td>
             <td>${todo.status}</td>
-          `;
-        const button = document.createElement('div');
-        button.innerHTML = `
-            <button onclick="deleteTodo(${todo.id})">Delete</button>
+            <button onclick="deleteTodo(${todo.id})" style="background:#D22" class="btn">Delete</button>
           `;
 
         tbody.appendChild(row);
-        tbody.appendChild(button);
       });
     } catch (err) {
       console.error('Error while loading todos :', err);
