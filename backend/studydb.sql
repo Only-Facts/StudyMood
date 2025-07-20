@@ -20,6 +20,14 @@ CREATE TABLE IF NOT EXISTS todo (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     dtime TIMESTAMP NOT NULL,
     user_id INTEGER UNSIGNED NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user (id),
-    status VARCHAR(255) DEFAULT 'not started'
+    status VARCHAR(255) DEFAULT 'not started',
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
+);
+
+CREATE TABLE streaks (
+    user_id INT NOT NULL PRIMARY KEY,
+    current_streak INT NOT NULL DEFAULT 0,
+    longest_streak INT NOT NULL DEFAULT 0,
+    last_active DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
