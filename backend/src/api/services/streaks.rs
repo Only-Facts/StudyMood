@@ -73,7 +73,11 @@ pub async fn update_streak(
             last_active: Set(today),
         };
 
-        new_streak.insert(db).await?;
+        if let Err(e) = new_streak.insert(db).await {
+            if e.to_string() != "None of the records are inserted" {
+                return Err(e);
+            }
+        }
     }
 
     get_streak(db, user_id).await
