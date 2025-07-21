@@ -51,12 +51,14 @@ async function handleRegisterSubmit(event) {
 
   if (response.status == 200) {
     const data = await response.json();
-    localStorage.setItem('jwt_token', `Bearer ${data.token}`);
+
     await fetch(`${API_BASE_URL}/streaks/`, {
       method: 'POST',
       headers: { 'Authorization': data.token }
     });
-    hideModal(data);
+
+    localStorage.setItem('jwt_token', `Bearer ${data.token}`);
+
     location.reload();
   } else {
     if (response.status == 401) {
