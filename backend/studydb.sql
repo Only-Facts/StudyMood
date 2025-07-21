@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS todo (
 );
 
 CREATE TABLE streaks (
-    user_id INT NOT NULL PRIMARY KEY,
+    user_id INTEGER UNSIGNED NOT NULL PRIMARY KEY,
     current_streak INT NOT NULL DEFAULT 0,
     longest_streak INT NOT NULL DEFAULT 0,
     last_active DATE NOT NULL,
