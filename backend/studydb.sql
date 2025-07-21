@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS todo (
 
 CREATE TABLE streaks (
     user_id INTEGER UNSIGNED NOT NULL PRIMARY KEY,
-    current_streak INT NOT NULL DEFAULT 0,
-    longest_streak INT NOT NULL DEFAULT 0,
+    current_streak INTEGER UNSIGNED NOT NULL DEFAULT 1,
+    longest_streak INTEGER UNSIGNED NOT NULL DEFAULT 1,
     last_active DATE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
