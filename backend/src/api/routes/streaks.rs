@@ -15,7 +15,7 @@ pub async fn get_streak(conn: web::Data<DatabaseConnection>, req: HttpRequest) -
     match verify_jwt(&token) {
         Ok(data) => {
             let user_id = data.claims.sub;
-            match streaks::get_streak(conn.get_ref(), user_id as i32).await {
+            match streaks::get_streak(conn.get_ref(), user_id).await {
                 Ok(user) => HttpResponse::Ok().json(user),
                 Err(err) => {
                     eprintln!("Failed to fetch user: {err}");
@@ -43,7 +43,7 @@ pub async fn update_streak(
     match verify_jwt(&token) {
         Ok(data) => {
             let user_id = data.claims.sub;
-            match streaks::update_streak(conn.get_ref(), user_id as i32).await {
+            match streaks::update_streak(conn.get_ref(), user_id).await {
                 Ok(()) => HttpResponse::Ok().body("Updated Streak"),
                 Err(e) => {
                     eprintln!("Failed to update streak: {e}");
