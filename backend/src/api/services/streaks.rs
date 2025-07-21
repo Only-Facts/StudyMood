@@ -4,12 +4,12 @@ use sea_orm::{DatabaseConnection, entity::*};
 
 pub async fn get_streak(
     db: &DatabaseConnection,
-    user_id: i32,
+    user_id: u32,
 ) -> Result<Option<streaks::Model>, sea_orm::DbErr> {
     streaks::Entity::find_by_id(user_id).one(db).await
 }
 
-pub async fn update_streak(db: &DatabaseConnection, user_id: i32) -> Result<(), sea_orm::DbErr> {
+pub async fn update_streak(db: &DatabaseConnection, user_id: u32) -> Result<(), sea_orm::DbErr> {
     let today = Local::now().date_naive();
 
     if let Some(streak) = streaks::Entity::find_by_id(user_id).one(db).await? {
