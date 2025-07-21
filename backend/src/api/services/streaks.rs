@@ -1,4 +1,4 @@
-use crate::api::entities::streaks;
+use crate::api::entities::{streaks, user};
 use chrono::{Duration, Local};
 use sea_orm::{DatabaseConnection, entity::*};
 
@@ -9,7 +9,37 @@ pub async fn get_streak(
     streaks::Entity::find_by_id(user_id).one(db).await
 }
 
-pub async fn update_streak(db: &DatabaseConnection, user_id: u32) -> Result<(), sea_orm::DbErr> {
+pub async fn init_streak(
+    db: &DatabaseConnection,
+    user_id: u32,
+) -> Result<Option<streaks::Model>, sea_orm::DbErr> {
+    let today = Local::now().date_naive();
+    let new_streak = streaks::ActiveModel {
+        user_id: Set(user_id.to_owned()),
+        current_streak: Set(1.to_owned()),
+        longest_streak: Set(1.to_owned()),
+        last_active: Set(today.to_owned()),
+    };
+
+    if let Err(e) = new_streak.insert(db).await {
+        if e.to_string() != "None of the records are inserted" {
+            return Err(e);
+        }
+    }
+    get_streak(db, user_id).await
+}
+
+pub async fn update_streak(
+    db: &DatabaseConnection,
+    user_id: u32,
+) -> Result<Option<streaks::Model>, sea_orm::DbErr> {
+    let user_exists = user::Entity::find_by_id(user_id).one(db).await?.is_some();
+
+    if !user_exists {
+        return Err(sea_orm::DbErr::Custom(format!(
+            "User id: {user_id} does not exist"
+        )));
+    }
     let today = Local::now().date_naive();
 
     if let Some(streak) = streaks::Entity::find_by_id(user_id).one(db).await? {
@@ -18,7 +48,7 @@ pub async fn update_streak(db: &DatabaseConnection, user_id: u32) -> Result<(), 
         let longest_streak = streak.longest_streak;
 
         if last_active == today {
-            return Ok(());
+            return get_streak(db, user_id).await;
         }
 
         let new_streak = if last_active == today - Duration::days(1) {
@@ -46,5 +76,5 @@ pub async fn update_streak(db: &DatabaseConnection, user_id: u32) -> Result<(), 
         new_streak.insert(db).await?;
     }
 
-    Ok(())
+    get_streak(db, user_id).await
 }
