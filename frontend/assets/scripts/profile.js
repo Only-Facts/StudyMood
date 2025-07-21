@@ -23,7 +23,10 @@ function hideModal(user) {
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
   const day = date.getDate().toString().padStart(2, '0');
 
-  const createdAt = `${day}/${month}/${year}`
+  const format = `${year}-${month}-${day}`
+  const new_date = new Date(format);
+  const options = { day: '2-digit', month: 'short', year: 'numeric' };
+  const createdAt = new_date.toLocaleDateString('en-GB', options);
 
   const info = `Email: ${user.email}
 Username: ${user.username}
@@ -49,6 +52,10 @@ async function handleRegisterSubmit(event) {
   if (response.status == 200) {
     const data = await response.json();
     localStorage.setItem('jwt_token', `Bearer ${data.token}`);
+    await fetch(`${API_BASE_URL}/streaks/`, {
+      method: 'POST',
+      headers: { 'Authorization': data.token }
+    });
     hideModal(data);
     location.reload();
   } else {
