@@ -6,9 +6,9 @@ use serde::Serialize;
 #[sea_orm(table_name = "streaks")]
 pub struct Model {
     #[sea_orm(primary_key)]
-    pub user_id: i32,
-    pub current_streak: i32,
-    pub longest_streak: i32,
+    pub user_id: u32,
+    pub current_streak: u32,
+    pub longest_streak: u32,
     pub last_active: NaiveDate,
 }
 
