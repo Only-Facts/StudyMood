@@ -1,4 +1,4 @@
-use actix_web::{HttpRequest, HttpResponse, Responder, delete, get, post, put, web};
+use actix_web::{HttpRequest, HttpResponse, Responder, delete, get, patch, post, web};
 use sea_orm::{DatabaseConnection, prelude::DateTimeUtc};
 use serde::Deserialize;
 
@@ -153,7 +153,7 @@ pub async fn delete_todo(
     }
 }
 
-#[put("/{id}")]
+#[patch("/{id}")]
 pub async fn update_todo(
     conn: web::Data<DatabaseConnection>,
     req: HttpRequest,
