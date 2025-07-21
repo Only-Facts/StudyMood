@@ -120,6 +120,7 @@ pub async fn api() -> std::io::Result<()> {
                     )
                     .app_data(conn.clone())
                     .service(streaks::get_streak)
+                    .service(streaks::init_streak)
                     .service(streaks::update_streak),
             )
     })
