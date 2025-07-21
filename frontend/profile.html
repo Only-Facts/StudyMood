@@ -93,12 +93,17 @@
   </div>
 
   <div class="purple-blob"></div>
-  <div class="text-box">
+  <div class="user-box">
     <h2>User Info</h2>
     <p id="user-info">...</p>
   </div>
 
   <button onclick="remove_token()" class="btn">Disconnect</button>
+
+  <div class="streak-box">
+    <h3>Streak</h3>
+    <div id="streak-text"></div>
+  </div>
 
   <button onclick="loadTodos()" class="btn" id="todos-btn" style="margin: 1em 0">Load Todos</button>
   <table border="0" id="todos" style="display:none">
@@ -126,6 +131,7 @@
 <script src="assets/scripts/theme.js"></script>
 <script src="assets/scripts/profile.js"></script>
 <script src="assets/scripts/todos.js"></script>
+<script src="assets/scripts/streaks.js"></script>
 <script src="assets/scripts/api.js"></script>
 
 </html>
