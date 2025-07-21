@@ -1,7 +1,4 @@
-async function updateStreak() {
-  const token = localStorage.getItem('jwt_token');
-  if (!token) return;
-
+async function updateStreak(token) {
   await fetch(`${API_BASE_URL}/streaks/`, {
     method: 'PUT',
     headers: {
@@ -11,9 +8,9 @@ async function updateStreak() {
 }
 
 async function getStreak() {
-  await updateStreak();
   const token = localStorage.getItem('jwt_token');
   if (!token) return;
+  await updateStreak(token);
 
   const response = await fetch(`${API_BASE_URL}/streaks/`, {
     headers: {
@@ -27,9 +24,9 @@ async function getStreak() {
   const options = { day: '2-digit', month: 'short', year: 'numeric' };
   const last_active = date.toLocaleDateString('en-GB', options);
 
-  document.getElementById('streak-text').innerHTML = `<p>Streak: ${streak.current_streak}</p>
-  <p>Longest: ${streak.longest_streak}</p>
-  <p>Last Active Day: ${last_active}</p>`
+  document.getElementById('streak-text').innerText = `Streak: ${streak.current_streak}
+  Longest: ${streak.longest_streak}
+  Last Active Day: ${last_active}`
 }
 
 document.addEventListener('DOMContentLoaded', () => {
