@@ -3,3 +3,5 @@
 </p>
 
 # StudyMood
+
+Study the Moody Way
