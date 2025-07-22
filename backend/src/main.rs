@@ -2,6 +2,7 @@ mod api;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    println!("Studymood API server is starting...");
     match api::api().await {
         Ok(_) => {
             println!("[✅] Studymood API server shut down gracefully.");
