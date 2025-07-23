@@ -63,7 +63,7 @@ jobs:
           node-version: "20"
 
       - name: Install ESLint
-        run: npm install -g eslint
+        run: npm install -g @eslint/js
 
       - name: Lint JS files
         run: |
