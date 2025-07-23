@@ -31,10 +31,12 @@ async function loadTrack(index) {
   });
   if (!response.ok) {
     showStatus('Failed to fetch stream URL:', response.status, response.statusText, 'error');
+    showMessage(`Failed to fetch stream URL: ${response.status} ${response.statusText}`, 'error');
     return;
   }
   const streamUrl = URL.createObjectURL(await response.blob());
   audioPlayer.src = streamUrl;
+  showMessage('Loading music...');
   audioPlayer.play();
   showStatus(`Playlist: ${currentPlaylistName} — Now playing: ${track.file}`);
 }
@@ -110,6 +112,7 @@ async function fetchMusicList() {
   } catch (error) {
     console.error('Error fetching music list:', error);
     showStatus(`Failed to load music: ${error.message}`, 'error');
+    showMessage(`Failed to load music: ${error.message}`, 'error');
   }
 }
 
