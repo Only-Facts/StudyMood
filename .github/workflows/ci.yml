@@ -66,4 +66,4 @@ jobs:
         run: npm install -g eslint
 
       - name: Lint JS files
-        run: eslint scripts/*.js
+        run: eslint assets/scripts/*.js
