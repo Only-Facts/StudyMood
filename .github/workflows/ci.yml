@@ -66,4 +66,6 @@ jobs:
         run: npm install -g eslint
 
       - name: Lint JS files
-        run: eslint assets/scripts/*.js
+        run: |
+          echo "import js from '@eslint/js'; export default [{ ignores: ["assets/fonts", "assets/img", "assets/styles", "errors/"],}, js.configs.recommended,{files: ["**/*.js"],languageOptions: {ecmaVersion: 2022,sourceType: "module",globals: {window: "readonly",document: "readonly",},},rules: {"no-unused-vars": "warn","no-undef": "error","no-console": "off",}}];" > eslint.config.js
+          eslint assets/scripts/*.js
