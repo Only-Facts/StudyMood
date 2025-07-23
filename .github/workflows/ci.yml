@@ -62,10 +62,39 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install ESLint
-        run: npm install -g eslint @eslint/js
-
-      - name: Lint JS files
+      - name: Configure and run ESLint
         run: |
-          echo -e 'import js from "@eslint/js";\nexport default [\n{\n ignores: ["assets/fonts", "assets/img", "assets/styles", "errors/"],\n},\n js.configs.recommended,\n{\nfiles: ["**/*.js"],\nlanguageOptions: {\necmaVersion: 2022,\nsourceType: "module",\nglobals: {\nwindow: "readonly",\ndocument: "readonly",\n},\n},\nrules: {\n"no-unused-vars": "warn",\n"no-undef": "error",\n"no-console": "off",\n}\n}\n];' > eslint.config.js
-          eslint assets/scripts/*.js
+          echo '{
+            "name": "frontend",
+            "version": "1.0.0",
+            "type": "module",
+            "devDependencies": {
+              "eslint": "9.31.0",
+              "@eslint/js": "9.31.0"
+            }
+          }' > package.json
+          npm install
+          echo 'import js from "@eslint/js";
+          export default [
+            {
+              ignores: ["assets/fonts", "assets/img", "assets/styles", "errors/"],
+            },
+            js.configs.recommended,
+            {
+              files: ["**/*.js"],
+              languageOptions: {
+                ecmaVersion: 2022,
+                sourceType: "module",
+                globals: {
+                  window: "readonly",
+                  document: "readonly",
+                },
+              },
+              rules: {
+                "no-unused-vars": "warn",
+                "no-undef": "error",
+                "no-console": "off",
+              }
+            }
+          ];' > eslint.config.js
+          npx eslint assets/scripts/*.js
