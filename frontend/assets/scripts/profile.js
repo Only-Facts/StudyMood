@@ -62,9 +62,9 @@ async function handleRegisterSubmit(event) {
     location.reload();
   } else {
     if (response.status == 401) {
-      alert("Authentication failed. Invalid Credentials");
+      showMessage('Authentication failed. Invalid Credentials', 'error');
     } else {
-      alert(`Authentication failed. Error: ${response.status}`);
+      showMessage(`Authentication failed. Error: ${response.status}`, 'error');
     }
   }
 }
@@ -89,9 +89,9 @@ async function handleLoginSubmit(event) {
     location.reload();
   } else {
     if (response.status == 401) {
-      alert("Authentication failed. Invalid Credentials");
+      showMessage('Authentication failed. Invalid Credentials', 'error');
     } else {
-      alert(`Authentication failed. Error: ${response.status}`);
+      showMessage(`Authentication failed. Error: ${response.status}`, 'error');
     }
   }
 }
