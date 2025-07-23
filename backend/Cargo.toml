@@ -13,10 +13,13 @@ chrono = { version = "0.4", features = ["serde"] }
 tokio = { version = "1.45.1", features = ["full"] }
 tokio-util = "0.7.15"
 walkdir = "2.5.0"
-sea-orm = { version = "1.1.13", features = [
+sea-orm = { version = "1.1.14", features = [
   "sqlx-mysql",
   "runtime-tokio-native-tls",
 ] }
 jsonwebtoken = "9.3.1"
 bcrypt = "0.17.0"
 serde_json = "1.0.140"
+
+[patch.crates-io]
+rsa = { git = "https://github.com/RustCrypto/RSA.git", branch = "0-9-x" }
