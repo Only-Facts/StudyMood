@@ -5,9 +5,9 @@ use actix_web::{
     App, HttpResponse, HttpServer, Responder, get,
     web::{self, Data},
 };
-use api::routes::{auth, music, user,streaks, todo};
-use api::services::loader;
 use api::db;
+use api::routes::{auth, music, streaks, todo, user};
+use api::services::loader;
 use sea_orm::DatabaseConnection;
 use std::{path::PathBuf, sync::Mutex};
 
