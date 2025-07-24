@@ -1,0 +1,150 @@
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: flex;
+    height: 60px;
+    padding: 2em 0.5em;
+  }
+
+  .header-logo {
+    margin: 0 0.6em 0;
+    max-height: 5vh;
+  }
+
+  .logo {
+    max-width: 100%;
+    max-height: 90%;
+    padding: 0;
+  }
+
+  .header-center {
+    max-height: 50vh;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    width: auto;
+    margin-left: 1em;
+  }
+
+  nav {
+    max-height: 50vh;
+    width: auto;
+  }
+
+  .header-box {
+    max-height: 10vh;
+    width: auto;
+    gap: 0;
+  }
+
+  .box {
+    gap: 0;
+    padding: 0.5em 1em;
+    max-height: 5vh;
+    width: auto;
+    line-height: 5vh;
+    font-size: 50%;
+  }
+
+  .header-spacer {
+    display: none;
+  }
+
+  #color-mode {
+    height: auto;
+    margin: auto;
+    margin-top: 0.5em;
+    position: relative;
+    left: 1em;
+  }
+
+  .audio-player {
+    width: 95%;
+    flex-direction: column;
+    padding: 1em 0.5em;
+  }
+
+  .audio-controls {
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .audio-controls-left {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  #previous,
+  #play-pause,
+  #next {
+    position: static;
+    margin: 0.5em;
+  }
+
+  .playlist-selector {
+    position: static;
+    margin-top: 1em;
+  }
+
+  .audio-volume {
+    position: static;
+    margin-top: 1em;
+    margin-left: 7em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #volume-slider {
+    width: 80%;
+    position: static;
+    margin-top: 0.5em;
+  }
+
+  #audio-progress {
+    margin: 1em 0;
+  }
+
+  .purple-blob {
+    width: 80%;
+    height: 70%;
+    margin-top: calc(60px + 8vh);
+    left: 10%;
+  }
+
+  .text-box {
+    margin-top: 25vh;
+  }
+
+  .table-wrapper {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  #todos th,
+  #todos td {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .status-badge,
+  .delete-btn,
+  .update-btn {
+    padding: 0.15rem 0.5rem;
+    font-size: 0.65rem;
+  }
+
+  .custom-btn {
+    margin-bottom: 1.5rem;
+  }
+
+  #add-todo-form,
+  #update-todo-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -46,14 +46,11 @@ services:
     restart: unless-stopped
 
   web:
-    image: nginx:latest
+    build: ./frontend/
     ports:
       - "8080:80"
     volumes:
-      - ./frontend/:/usr/share/nginx/html:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-    environment:
-      - API_URL=http://localhost:8080/api/
     depends_on:
       - api
     networks:
