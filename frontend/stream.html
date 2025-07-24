@@ -99,6 +99,17 @@
 
     <audio id="audio" preload="metadata"></audio>
   </div>
+
+  <button onclick="openProfile()" class="custom-btn" id="profile-btn" style="margin-top: 5vh">Profile</button>
+
+  <div id="profile-modal" class="modal-overlay">
+    <div class="modal-content" style="max-width: 90%; height: 70vh;">
+      <button onclick="closeProfile()" class="custom-btn"
+        style="background: red; width: 20px; height: 20px; margin: 0; padding: 0; position: fixed"></button>
+      <iframe id="profileIframe" src="/profile" title="Your Profile" allowfullscreen
+        style="width: 90%; height: 100%;"></iframe>
+    </div>
+  </div>
 </body>
 
 <script src="assets/scripts/api.js"></script>
@@ -106,5 +117,15 @@
 <script src="assets/scripts/theme.js"></script>
 <script src="assets/scripts/audio.js"></script>
 <script src="assets/scripts/music-api.js"></script>
+<script>
+  function openProfile() {
+    const modal = document.getElementById('profile-modal');
+    modal.classList.add('visible');
+  }
+  function closeProfile() {
+    const modal = document.getElementById('profile-modal');
+    modal.classList.remove('visible');
+  }
+</script>
 
 </html>
