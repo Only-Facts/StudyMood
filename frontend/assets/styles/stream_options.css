@@ -1,0 +1,52 @@
+.radio-tile-group {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Hide the native radio input */
+.radio-tile input[type="radio"] {
+  display: none;
+}
+
+/* Tile styling */
+.radio-tile {
+  cursor: pointer;
+}
+.radio-tile-content {
+  padding: 2rem;
+  border: 2px solid var(--text-muted);
+  border-radius: 45px;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.radio-tile-content span {
+  display: block;
+  font-size: 1.1rem;
+}
+
+/* Hover effect */
+.radio-tile:hover .radio-tile-content {
+  border-color: var(--purple);
+}
+
+/* Neon effect on checked */
+.radio-tile input:checked + .radio-tile-content {
+  border-color: var(--purple);
+  box-shadow:
+    0 0 8px var(--purple),
+    0 0 16px var(--purple),
+    0 0 24px var(--purple);
+}
+
+/* Inner highlight ring */
+.radio-tile input:checked + .radio-tile-content::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 2px solid var(--purple);
+  border-radius: 45px;
+}
