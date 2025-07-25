@@ -1,0 +1,203 @@
+.table-wrapper {
+  width: 100%;
+  max-width: 64rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 2rem;
+  z-index: 2;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+}
+
+.table-wrapper.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 0.3s ease;
+}
+
+.table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: var(--transparent-bg-light);
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: var(--purple-dark);
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--purple);
+}
+
+#todos {
+  min-width: 100%;
+  color: var(--text);
+  border-collapse: collapse;
+  background-color: var(--transparent-bg-dark);
+  box-shadow: var(--box-shadow);
+}
+
+#todos thead tr {
+  background-color: var(--transparent-bg);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+#todos th {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+}
+
+#todos th:last-child {
+  text-align: center;
+}
+
+#todo-body {
+  font-size: 0.875rem;
+  font-weight: 300;
+}
+
+#todo-body tr {
+  border-bottom: 1px solid var(--transparent-bg-light);
+}
+
+#todo-body tr:nth-child(even) {
+  background-color: var(--transparent-bg-dark);
+}
+
+#todo-body tr:nth-child(odd) {
+  background-color: var(--transparent-bg);
+}
+
+#todo-body tr:hover {
+  background-color: var(--transparent-bg-light);
+  transition: background-color 0.2s ease;
+}
+
+#todo-body td {
+  padding: 0.75rem 1.5rem;
+  white-space: nowrap;
+}
+
+#todo-body td:last-child {
+  text-align: center;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-completed {
+  background-color: hsl(120, 60%, 40%);
+  color: white;
+}
+
+.status-in-progress {
+  background-color: hsl(40, 90%, 50%);
+  color: white;
+}
+
+.status-pending {
+  background-color: var(--purple);
+  color: white;
+}
+
+.status-default {
+  background-color: var(--text-muted);
+  color: var(--bg);
+}
+
+.delete-btn {
+  background-color: hsl(0, 70%, 50%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: hsl(0, 80%, 40%);
+  transform: scale(1.05);
+}
+
+.update-btn {
+  background-color: var(--purple-dark);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  background-color: var(--purple);
+  transform: scale(1.05);
+}
+
+
+#add-todo-form,
+#update-todo-form {
+  background-color: var(--transparent-bg);
+  padding: 1.5em;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: 2em auto;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+}
+
+#add-todo-form input,
+#add-todo-form select,
+#add-todo-form button,
+#update-todo-form input,
+#update-todo-form select,
+#update-todo-form button {
+  padding: 0.6em;
+  font-size: 1em;
+  border-radius: 10px;
+  border: none;
+}
+
+#add-todo-form select,
+#add-todo-form input,
+#update-todo-form input,
+#update-todo-form select {
+  background-color: var(--bg-light);
+  color: var(--text);
+  min-width: 120px;
+  flex: 1;
+}
+
+#add-todo-btn {
+  width: 15em;
+  height: 45px;
+}
+
+#todos-btn {
+  width: 15em;
+  height: 45px;
+}
