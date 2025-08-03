@@ -11,7 +11,7 @@
 
 ## About
 
-> [!note] Study the Moody Way
+> [!NOTE]
 > A Study Website to get in the mood !
 
 ## Licence
