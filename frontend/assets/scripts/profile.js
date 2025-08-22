@@ -49,7 +49,7 @@ async function handleRegisterSubmit(event) {
     body: JSON.stringify(body)
   });
 
-  if (response.status == 200) {
+  if (response.ok) {
     const data = await response.json();
 
     await fetch(`${API_BASE_URL}/streaks/`, {

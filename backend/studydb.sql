@@ -10,6 +10,8 @@ CREATE TABLE IF NOT EXISTS user (
     pass VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     username VARCHAR(255) NOT NULL,
+    is_verified BOOLEAN,
+    verification_token VARCHAR(255),
     UNIQUE (email)
 );
 
@@ -24,7 +26,7 @@ CREATE TABLE IF NOT EXISTS todo (
     FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE
 );
 
-CREATE TABLE streaks (
+CREATE TABLE IF NOT EXISTS streaks (
     user_id INTEGER UNSIGNED NOT NULL PRIMARY KEY,
     current_streak INTEGER UNSIGNED NOT NULL DEFAULT 1,
     longest_streak INTEGER UNSIGNED NOT NULL DEFAULT 1,

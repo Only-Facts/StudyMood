@@ -20,6 +20,8 @@ sea-orm = { version = "1.1.14", features = [
 jsonwebtoken = "9.3.1"
 bcrypt = "0.17.0"
 serde_json = "1.0.140"
+rand = "0.9.2"
+reqwest = { version = "0.12.23", features = ["json"] }
 
 [patch.crates-io]
 rsa = { git = "https://github.com/RustCrypto/RSA.git", branch = "0-9-x" }

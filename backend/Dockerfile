@@ -21,16 +21,18 @@ COPY src /app/src
 
 RUN cargo build --release --locked
 
-FROM debian:bookworm-slim
+FROM rust:slim-bookworm
 
 RUN apt-get update && \
   apt-get install -y libssl-dev \
   mariadb-client && \
   apt-get clean
 
-COPY --from=builder /app/target/release/backend /app/studymood
-RUN chmod +x /app/studymood
+WORKDIR /app
+
+COPY --from=builder /app/target/release/backend ./studymood
+RUN chmod +x ./studymood
 
 EXPOSE 8081
 
-CMD [ "/app/studymood" ]
+CMD [ "./studymood" ]
