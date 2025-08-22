@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS user (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     username VARCHAR(255) NOT NULL,
     is_verified BOOLEAN,
+    verification_token VARCHAR(255),
     UNIQUE (email)
 );
 
