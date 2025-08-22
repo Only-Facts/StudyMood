@@ -22,7 +22,7 @@ pub async fn send_verification_email(
         .parse()
         .unwrap();
 
-    let verification_link = format!("http://{ip}:{port}/verify?token={token}");
+    let verification_link = format!("http://{ip}:{port}/auth/verify?token={token}");
 
     let api_key = std::env::var("API_TOKEN").expect("API_TOKEN not set");
 
@@ -31,7 +31,7 @@ pub async fn send_verification_email(
 
     let from = Sender {
         name: "StudyMood".to_string(),
-        email: "noreply@test-p7kx4xwx6vmg9yjr.mlsender.net".to_string(),
+        email: "study.mood@test-p7kx4xwx6vmg9yjr.mlsender.net".to_string(),
     };
 
     let to = vec![Recipient {
