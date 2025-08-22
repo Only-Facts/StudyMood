@@ -36,7 +36,8 @@ services:
     environment:
       - MUSIC_DIR=/app/music/
       - DATABASE_URL=mysql://root:epitech@db:3306/studydb
-      - SECRET=iusearchbtw
+    env_file:
+      - ./backend/.env
     networks:
       - back-tier
       - front-tier
