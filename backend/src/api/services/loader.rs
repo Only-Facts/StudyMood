@@ -43,23 +43,23 @@ pub async fn load_music_files(music_dir: &Path) -> Result<HashMap<String, MusicI
                 .first_or_text_plain()
                 .to_string();
 
-            if mime_type.starts_with("audio/") {
-                if let Some(filename) = path.file_name().and_then(|s| s.to_str()) {
-                    let relative_path = path
-                        .strip_prefix(music_dir)
-                        .unwrap_or(path)
-                        .to_string_lossy()
-                        .into_owned();
-                    let mut file = filename.to_string();
-                    file.truncate(file.len() - 4);
-                    let track_info = MusicInfo {
-                        file,
-                        path: relative_path.clone(),
-                        mime: mime_type,
-                    };
-                    tracks.insert(relative_path, track_info);
-                    println!("Found music file: {filename}");
-                }
+            if mime_type.starts_with("audio/")
+                && let Some(filename) = path.file_name().and_then(|s| s.to_str())
+            {
+                let relative_path = path
+                    .strip_prefix(music_dir)
+                    .unwrap_or(path)
+                    .to_string_lossy()
+                    .into_owned();
+                let mut file = filename.to_string();
+                file.truncate(file.len() - 4);
+                let track_info = MusicInfo {
+                    file,
+                    path: relative_path.clone(),
+                    mime: mime_type,
+                };
+                tracks.insert(relative_path, track_info);
+                println!("Found music file: {filename}");
             }
         }
     }
