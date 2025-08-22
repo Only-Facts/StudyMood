@@ -42,11 +42,19 @@ async fn load_musics() -> Result<Data<loader::AppState>, std::io::Error> {
 #[allow(clippy::manual_strip, clippy::io_other_error)]
 #[actix_web::main]
 pub async fn main() -> std::io::Result<()> {
+    dotenvy::dotenv().ok();
+    let ip = std::env::var("IP").expect("Expected IP environment variable.");
+    let port: u16 = std::env::var("PORT")
+        .expect("Expected PORT environment variable.")
+        .parse()
+        .unwrap();
+
     let app_state = load_musics()
         .await
         .expect("AppState Error: Failed to load musics");
     let conn = web::Data::new(db::init_db().await);
-    println!("[✅] DB Connection Success !");
+    println!();
+    println!("[✅] DB Connected !");
     HttpServer::new(move || {
         App::new()
             .app_data(conn.clone())
@@ -104,7 +112,8 @@ pub async fn main() -> std::io::Result<()> {
                     )
                     .app_data(conn.clone())
                     .service(auth::register_user)
-                    .service(auth::login_user),
+                    .service(auth::login_user)
+                    .service(auth::verify_email),
             )
             .service(
                 web::scope("/streaks")
@@ -121,7 +130,7 @@ pub async fn main() -> std::io::Result<()> {
                     .service(streaks::update_streak),
             )
     })
-    .bind(("0.0.0.0", 8081))?
+    .bind((ip, port))?
     .run()
     .await
 }
