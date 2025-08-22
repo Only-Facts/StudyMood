@@ -21,10 +21,10 @@ pub async fn init_streak(
         last_active: Set(today.to_owned()),
     };
 
-    if let Err(e) = new_streak.insert(db).await {
-        if e.to_string() != "None of the records are inserted" {
-            return Err(e);
-        }
+    if let Err(e) = new_streak.insert(db).await
+        && e.to_string() != "None of the records are inserted"
+    {
+        return Err(e);
     }
     get_streak(db, user_id).await
 }
@@ -73,10 +73,10 @@ pub async fn update_streak(
             last_active: Set(today),
         };
 
-        if let Err(e) = new_streak.insert(db).await {
-            if e.to_string() != "None of the records are inserted" {
-                return Err(e);
-            }
+        if let Err(e) = new_streak.insert(db).await
+            && e.to_string() != "None of the records are inserted"
+        {
+            return Err(e);
         }
     }
 
